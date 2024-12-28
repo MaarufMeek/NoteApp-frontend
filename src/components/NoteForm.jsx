@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import api from "../api.js";
+import {showToast} from "./toast.js";
 
 // Smooth scrolling function
 export function scrollToSection(sectionID) {
@@ -33,10 +34,10 @@ function NoteForm({ setNotes, currentNote, setCurrentNote }) {
                                 note.id === currentNote.id ? res.data : note
                             )
                         );
-                        alert("Note updated successfully!");
+                        showToast("Note updated successfully!", "success")
                         clearForm();
                     } else {
-                        alert("Error updating note");
+                        showToast("Error updating note", "error")
                     }
                 })
                 .catch((error) => {
@@ -50,15 +51,15 @@ function NoteForm({ setNotes, currentNote, setCurrentNote }) {
                 .then((res) => {
                     if (res.status === 201) {
                         setNotes((prevNotes) => [...prevNotes, res.data]);
-                        alert("Note created successfully!");
+                        showToast("Note created successfully", "success")
                         clearForm();
                     } else {
-                        alert("Error creating note");
+                        showToast("Error creating note", "error")
                     }
                 })
                 .catch((error) => {
                     console.error("Error creating note:", error);
-                    alert("An error occurred while creating the note.");
+                    showToast("An error occurred while creating note", "error")
                 });
         }
     };

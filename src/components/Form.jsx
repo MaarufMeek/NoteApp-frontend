@@ -3,6 +3,7 @@ import {Link, useNavigate} from "react-router-dom";
 import api from "../api.js";
 import {ACCESS_TOKEN, REFRESH_TOKEN} from "../constants.js";
 import "../styles/form.css"
+import {showToast} from "./toast.js";
 
 
 function Form({route, method}) {
@@ -29,7 +30,7 @@ function Form({route, method}) {
             }
 
         } catch (error) {
-            alert(error)
+            showToast(error, "error")
         } finally {
             setLoading(false)
         }
